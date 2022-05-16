@@ -1,4 +1,4 @@
-import { IRepo } from './types/types';
+import { IRepo } from './types';
 
 type ReposEntryProps = IRepo;
 
