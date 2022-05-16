@@ -1,6 +1,6 @@
 import { IRepo } from './types';
 
-type ReposEntryProps = IRepo;
+type ReposEntryProps = Omit<IRepo, 'id'>;
 
 export default function ReposEntry({
   name,

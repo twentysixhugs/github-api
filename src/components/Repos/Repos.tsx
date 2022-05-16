@@ -1,4 +1,4 @@
-import { IRepo } from './types/types';
+import { IRepo } from './types';
 import ReposEntry from './ReposEntry';
 
 type ReposProps = {
@@ -15,6 +15,7 @@ export default function Repos({ repos }: ReposProps) {
             name={repo.name}
             description={repo.description}
             htmlUrl={repo.htmlUrl}
+            key={repo.id}
           />
         );
       })}
