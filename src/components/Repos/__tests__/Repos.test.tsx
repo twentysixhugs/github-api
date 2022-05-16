@@ -39,4 +39,11 @@ describe('Rendering data', () => {
     });
   });
 
+  it('Renders empty state when zero repos are provided', () => {
+    render(<Repos repos={[]} />);
+
+    expect(
+      screen.getByText(/repository list is empty/i),
+    ).toBeInTheDocument();
+  });
 });
