@@ -9,10 +9,20 @@ function App() {
   const [searchQuery, setSearchQuery] = useState<null | string>(null);
 
   type UserData = {
+    ['name']: string;
+    ['login']: string;
+    ['html_url']: string;
+    ['avatar_url']: string;
+    ['followers']: number;
+    ['following']: number;
     [key: string]: string | number | boolean;
   } | null;
 
   type ReposData = Array<{
+    ['name']: string;
+    ['description']: string;
+    ['html_url']: string;
+    ['id']: number;
     [key: string]: string | number | boolean;
   }> | null;
 
@@ -94,15 +104,15 @@ function App() {
     viewToRender = (
       <SearchState>
         <UserInfo
-          name={userData['name'] as string}
-          login={userData['login'] as string}
-          htmlUrl={userData['html_url'] as string}
-          avatarUrl={userData['avatar_url'] as string}
-          followersCount={userData['followers'] as number}
-          followingCount={userData['following'] as number}
+          name={userData['name']}
+          login={userData['login']}
+          htmlUrl={userData['html_url']}
+          avatarUrl={userData['avatar_url']}
+          followersCount={userData['followers']}
+          followingCount={userData['following']}
         />
         <ReposOverview
-          allRepos={reposData.map((repo: any) => {
+          allRepos={reposData.map((repo) => {
             const repoDataToRender: IRepo = {
               name: repo['name'],
               description: repo['description'],
