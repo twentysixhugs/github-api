@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../Header';
 import { IRepo } from '../Repos/types';
 import ReposOverview from '../ReposOverview';
@@ -17,40 +17,47 @@ function App() {
 
   const [userData, setUserData] = useState<UserData>(null);
   const [reposData, setReposData] = useState<ReposData>(null);
+  const [isNotFound, setIsNotFound] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const [isDataLoaded, setIsDataLoaded] = useState(false);
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchData = async (
+      fetchUrl: string,
+      callback:
+        | React.Dispatch<React.SetStateAction<UserData>>
+        | React.Dispatch<React.SetStateAction<ReposData>>,
+    ) => {
       try {
-        const res = await fetch(
-          `https://api.github.com/users/${searchQuery}`,
-        );
+        const res = await fetch(fetchUrl);
+
+        if (!res.ok && res.status === 404) {
+          setIsNotFound(true);
+          return;
+        }
+
         const data = await res.json();
 
-        setUserData(data);
+        callback(data);
       } catch (err) {
-        console.log(err);
-      }
-    };
-
-    const fetchReposData = async () => {
-      try {
-        const res = await fetch(
-          `https://api.github.com/users/${searchQuery}/repos`,
-        );
-        const data = await res.json();
-
-        setReposData(data);
-      } catch (err) {
-        console.log(err);
+        setIsError(true);
       }
     };
 
     if (searchQuery) {
       setIsDataLoaded(false);
 
-      Promise.all([fetchUserData(), fetchReposData()]).then(() => {
+      Promise.all([
+        fetchData(
+          `https://api.github.com/users/${searchQuery}`,
+          setUserData,
+        ),
+        fetchData(
+          `https://api.github.com/users/${searchQuery}/repos`,
+          setReposData,
+        ),
+      ]).then(() => {
         setSearchQuery(null);
         setIsDataLoaded(true);
       });
@@ -58,12 +65,17 @@ function App() {
   }, [searchQuery]);
 
   const handleSearch = (query: string) => {
+    setIsNotFound(false);
     setSearchQuery(query);
   };
 
   let viewToRender;
 
-  if (!userData && !reposData) {
+  if (isNotFound) {
+    viewToRender = 'not found';
+  } else if (isError) {
+    viewToRender = 'Something went wrong, please try again';
+  } else if (!userData && !reposData) {
     viewToRender = 'initial screen';
   } else if (!isDataLoaded) {
     viewToRender = 'loading screen';
