@@ -26,14 +26,4 @@ describe('Search', () => {
 
     expect(mockSearchCallback).toHaveBeenCalledWith('testquery');
   });
-
-  it('Does not call search callback when the query is empty', () => {
-    const mockSearchCallback = jest.fn();
-
-    render(<Header onSearch={mockSearchCallback} />);
-
-    userEvent.keyboard('{Enter}');
-
-    expect(mockSearchCallback).not.toHaveBeenCalled();
-  });
 });
