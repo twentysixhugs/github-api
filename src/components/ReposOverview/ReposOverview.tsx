@@ -1,7 +1,10 @@
 import Repos from './Repos';
-import { IRepo } from './types';
+import Pagination from './Pagination';
+
 import ReactPaginate, { ReactPaginateProps } from 'react-paginate';
+
 import { useState, useEffect } from 'react';
+import { IRepo } from './types';
 
 type ReposOverviewProps = {
   allRepos: IRepo[];
@@ -45,23 +48,13 @@ export default function ReposOverview({ allRepos }: ReposOverviewProps) {
     viewToRender = (
       <>
         {currentItems && <Repos repos={currentItems} />}
-        <div className="c-repos-overview__wrapper c-repos-overview__wrapper--pagination">
-          <span className="c-repos-overview__pagination-stats">
-            {pageOffset + 1}-{pageOffset + PER_PAGE} of {allRepos.length}{' '}
-            items
-          </span>
-          <ReactPaginate
-            breakLabel="..."
-            nextLabel="next >"
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={3}
-            pageCount={pageCount}
-            previousLabel="< previous"
-            renderOnZeroPageCount={() => null}
-            containerClassName="c-repos-overview__pagination-ui"
-            activeClassName="active-page"
-          />
-        </div>
+        <Pagination
+          pageOffset={pageOffset}
+          perPage={PER_PAGE}
+          allItemsCount={allRepos.length}
+          pageCount={pageCount}
+          onPageClick={handlePageClick}
+        />
       </>
     );
   } else {
