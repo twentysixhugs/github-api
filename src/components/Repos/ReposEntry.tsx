@@ -9,7 +9,12 @@ export default function ReposEntry({
 }: ReposEntryProps) {
   return (
     <div className="c-repo">
-      <a href={htmlUrl} className="c-repo__name-link">
+      <a
+        className="c-repo__name-link"
+        href={htmlUrl}
+        target="_blank"
+        rel="noreferrer"
+      >
         {name}
       </a>
       <span className="c-repo__description">{description}</span>

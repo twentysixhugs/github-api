@@ -25,7 +25,12 @@ export default function UserInfo({
         alt="User avatar"
       ></img>
       <span className="c-user-info__name">{name}</span>
-      <a className="c-user-info__login" href={htmlUrl}>
+      <a
+        className="c-user-info__login"
+        href={htmlUrl}
+        target="_blank"
+        rel="noreferrer"
+      >
         {login}
       </a>
       <Stats
