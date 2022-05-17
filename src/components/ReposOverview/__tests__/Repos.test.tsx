@@ -30,20 +30,12 @@ describe('Rendering data', () => {
     },
   ];
 
-  it('Renders repos when they are provided', () => {
+  it('Renders repos', () => {
     render(<Repos repos={mockRepos} />);
 
     mockRepos.forEach((repo) => {
       expect(screen.getByText(repo.name)).toBeInTheDocument();
       expect(screen.getByText(repo.description)).toBeInTheDocument();
     });
-  });
-
-  it('Renders empty state when zero repos are provided', () => {
-    render(<Repos repos={[]} />);
-
-    expect(
-      screen.getByText(/repository list is empty/i),
-    ).toBeInTheDocument();
   });
 });
