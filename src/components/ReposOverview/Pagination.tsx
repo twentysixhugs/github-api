@@ -22,11 +22,12 @@ export default function Pagination({
       </span>
       <ReactPaginate
         breakLabel="..."
-        nextLabel="next >"
+        nextLabel=">"
         onPageChange={onPageClick}
+        marginPagesDisplayed={1}
         pageRangeDisplayed={3}
         pageCount={pageCount}
-        previousLabel="< previous"
+        previousLabel="<"
         renderOnZeroPageCount={() => null}
         containerClassName="c-pagination__ui"
         breakClassName="c-pagination__break"
