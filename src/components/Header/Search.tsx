@@ -19,6 +19,7 @@ export default function Search({ onSearch }: SearchProps) {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         name="query"
+        autoComplete="off"
       ></input>
     </form>
   );
