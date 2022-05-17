@@ -17,7 +17,7 @@ export default function Pagination({
 }: PaginationProps) {
   return (
     <div className="c-pagination">
-      <span className="c-repos-overview__pagination-stats">
+      <span className="c-pagination__stats">
         {pageOffset + 1}-{pageOffset + perPage} of {allItemsCount} items
       </span>
       <ReactPaginate
@@ -28,8 +28,15 @@ export default function Pagination({
         pageCount={pageCount}
         previousLabel="< previous"
         renderOnZeroPageCount={() => null}
-        containerClassName="c-repos-overview__pagination-ui"
-        activeClassName="active-page"
+        containerClassName="c-pagination__ui"
+        breakClassName="c-pagination__break"
+        pageClassName="c-pagination__page"
+        activeClassName="c-pagination__active"
+        previousClassName="c-pagination__btn"
+        nextClassName="c-pagination__btn"
+        disabledClassName="c-pagination__btn--disabled"
+        previousAriaLabel="previous page button"
+        nextAriaLabel="next page button"
       />
     </div>
   );
