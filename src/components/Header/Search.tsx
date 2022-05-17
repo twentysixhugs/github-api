@@ -9,7 +9,10 @@ export default function Search({ onSearch }: SearchProps) {
 
   const handleSubmit: React.FormEventHandler = (e) => {
     e.preventDefault();
-    onSearch(query);
+
+    if (query) {
+      onSearch(query);
+    }
   };
 
   return (
