@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../Header';
-import { IRepo } from '../Repos/types';
+import { IRepo } from '../ReposOverview/types';
 import ReposOverview from '../ReposOverview';
 import UserInfo from '../UserInfo';
+import SearchState from '../SearchState';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState<null | string>(null);
@@ -17,10 +18,17 @@ function App() {
 
   const [userData, setUserData] = useState<UserData>(null);
   const [reposData, setReposData] = useState<ReposData>(null);
+
+  const [isLoading, setIsLoading] = useState(false);
   const [isNotFound, setIsNotFound] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const [isDataLoaded, setIsDataLoaded] = useState(false);
+  useEffect(() => {
+    if (isError || isNotFound) {
+      setUserData(null);
+      setReposData(null);
+    }
+  }, [isError, isNotFound]);
 
   useEffect(() => {
     const fetchData = async (
@@ -46,7 +54,7 @@ function App() {
     };
 
     if (searchQuery) {
-      setIsDataLoaded(false);
+      setIsLoading(true);
 
       Promise.all([
         fetchData(
@@ -59,7 +67,7 @@ function App() {
         ),
       ]).then(() => {
         setSearchQuery(null);
-        setIsDataLoaded(true);
+        setIsLoading(false);
       });
     }
   }, [searchQuery]);
@@ -72,17 +80,19 @@ function App() {
   let viewToRender;
 
   if (isNotFound) {
-    viewToRender = 'not found';
+    viewToRender = <SearchState searchState="User not found" />;
   } else if (isError) {
-    viewToRender = 'Something went wrong, please try again';
-  } else if (!userData && !reposData) {
-    viewToRender = 'initial screen';
-  } else if (!isDataLoaded) {
-    viewToRender = 'loading screen';
+    // If it's not 404 (so that the app doesn't break)
+    viewToRender = <SearchState searchState="Error" />;
+  } else if (isLoading) {
+    viewToRender = <SearchState searchState="Loading" />;
+  } else if (!(userData && reposData)) {
+    // If it's not loading, but there's no data
+    viewToRender = <SearchState searchState="Initial state" />;
   } else if (userData && reposData) {
-    console.log(userData, reposData);
+    // If there are no errors, it's not loading and the data is available
     viewToRender = (
-      <>
+      <SearchState>
         <UserInfo
           name={userData['name'] as string}
           login={userData['login'] as string}
@@ -103,7 +113,7 @@ function App() {
             return repoDataToRender;
           })}
         />
-      </>
+      </SearchState>
     );
   }
 
