@@ -43,3 +43,41 @@ describe('Stats rendering', () => {
     expect(screen.getByText('176.8k following')).toBeInTheDocument();
   });
 });
+
+describe('Name and login rendering', () => {
+  const mockName = 'test name';
+  const mockLogin = 'test login';
+  const mockUrl = '/';
+  const mockFollowers = 3;
+  const mockFollowing = 3;
+
+  it('Renders user name', () => {
+    render(
+      <UserInfo
+        name={mockName}
+        login={mockLogin}
+        followersCount={mockFollowers}
+        followingCount={mockFollowing}
+        htmlUrl={mockUrl}
+        avatarUrl={mockUrl}
+      />,
+    );
+
+    expect(screen.getByText(mockName)).toBeInTheDocument();
+  });
+
+  it('Renders user login', () => {
+    render(
+      <UserInfo
+        name={mockName}
+        login={mockLogin}
+        followersCount={mockFollowers}
+        followingCount={mockFollowing}
+        htmlUrl={mockUrl}
+        avatarUrl={mockUrl}
+      />,
+    );
+
+    expect(screen.getByText(mockLogin)).toBeInTheDocument();
+  });
+});
