@@ -8,25 +8,25 @@ describe('Rendering data', () => {
       name: 'test1',
       description: 'desc1',
       htmlUrl: '/',
-      id: '1',
+      id: 1,
     },
     {
       name: 'test2',
       description: 'desc2',
       htmlUrl: '/',
-      id: '2',
+      id: 2,
     },
     {
       name: 'test3',
       description: 'desc3',
       htmlUrl: '/',
-      id: '3',
+      id: 3,
     },
     {
       name: 'test4',
       description: 'desc4',
       htmlUrl: '/',
-      id: '4',
+      id: 4,
     },
   ];
 
