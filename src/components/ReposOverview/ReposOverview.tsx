@@ -1,5 +1,5 @@
-import Repos from '../Repos/Repos';
-import { IRepo } from '../Repos/types';
+import Repos from './Repos';
+import { IRepo } from './types';
 
 type ReposOverviewProps = {
   allRepos: IRepo[];
