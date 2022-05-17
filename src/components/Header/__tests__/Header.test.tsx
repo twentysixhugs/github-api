@@ -1,6 +1,5 @@
 import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { keyboard } from '@testing-library/user-event/dist/keyboard';
 import Header from '../Header';
 
 describe('Search', () => {
@@ -11,7 +10,7 @@ describe('Search', () => {
 
     userEvent.type(screen.getByRole('textbox'), 'testquery');
 
-    keyboard('{Enter}');
+    userEvent.keyboard('{Enter}');
 
     expect(mockSearchCallback).toHaveBeenCalled();
   });
@@ -23,7 +22,7 @@ describe('Search', () => {
 
     userEvent.type(screen.getByRole('textbox'), 'testquery');
 
-    keyboard('{Enter}');
+    userEvent.keyboard('{Enter}');
 
     expect(mockSearchCallback).toHaveBeenCalledWith('testquery');
   });
@@ -33,7 +32,7 @@ describe('Search', () => {
 
     render(<Header onSearch={mockSearchCallback} />);
 
-    keyboard('{Enter}');
+    userEvent.keyboard('{Enter}');
 
     expect(mockSearchCallback).not.toHaveBeenCalled();
   });
