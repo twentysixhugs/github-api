@@ -8,14 +8,17 @@ body {
     'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
     'Helvetica Neue', sans-serif;
   --header-offset: 72px;
+
+  margin: 0;
+
   font-family: 'Inter', var(--system-font);
   font-weight: 400;
-  margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background: #f9f9f9;
 }
 
 #root {
   min-height: 100vh;
-  background: #f9f9f9;
 }
