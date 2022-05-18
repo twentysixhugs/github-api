@@ -15,7 +15,7 @@ export default function SearchState({
   switch (searchState) {
     case 'Initial state':
       return (
-        <Base>
+        <Base classNameModifier="initial">
           <img
             className="c-search-state__img"
             src={searchIconPath}
@@ -28,13 +28,13 @@ export default function SearchState({
       );
     case 'Loading':
       return (
-        <Base>
+        <Base classNameModifier="loading">
           <Loader />
         </Base>
       );
     case 'User not found':
       return (
-        <Base>
+        <Base classNameModifier="user-not-found">
           <img
             className="c-search-state__img"
             src={userIconPath}
@@ -46,7 +46,7 @@ export default function SearchState({
     case 'Error':
       /* For handling everything that's not 404 so that the app doesn't break */
       return (
-        <Base>
+        <Base classNameModifier="error">
           <span className="c-search-state__message">
             Something went wrong
           </span>
@@ -57,6 +57,16 @@ export default function SearchState({
   }
 }
 
-function Base({ children }: { children?: React.ReactNode }) {
-  return <div className="c-search-state">{children}</div>;
+function Base({
+  children,
+  classNameModifier,
+}: {
+  children?: React.ReactNode;
+  classNameModifier?: string;
+}) {
+  return (
+    <div className={`c-search-state c-search-state--${classNameModifier}`}>
+      {children}
+    </div>
+  );
 }
