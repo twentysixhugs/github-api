@@ -1,4 +1,5 @@
 import ReactPaginate from 'react-paginate';
+import paginationArrowIcon from './assets/pagination_arrow_icon.svg';
 
 type PaginationProps = {
   pageOffset: number;
@@ -22,12 +23,12 @@ export default function Pagination({
       </span>
       <ReactPaginate
         breakLabel="..."
-        nextLabel=">"
+        nextLabel={<img src={paginationArrowIcon}></img>}
         onPageChange={onPageClick}
         marginPagesDisplayed={1}
         pageRangeDisplayed={3}
         pageCount={pageCount}
-        previousLabel="<"
+        previousLabel={<img src={paginationArrowIcon}></img>}
         renderOnZeroPageCount={() => null}
         containerClassName="c-pagination__ui"
         breakClassName="c-pagination__break"

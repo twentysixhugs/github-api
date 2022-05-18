@@ -4,6 +4,8 @@ import Pagination from './Pagination';
 import { useState, useEffect } from 'react';
 import { IRepo } from './types';
 
+import reposNotFoundIcon from './assets/repos_not_found_icon.svg';
+
 type ReposOverviewProps = {
   allRepos: IRepo[];
 };
@@ -58,7 +60,7 @@ export default function ReposOverview({ allRepos }: ReposOverviewProps) {
   } else {
     viewToRender = (
       <>
-        <img src="" alt=""></img>
+        <img src={reposNotFoundIcon} alt=""></img>
         <span className="c-repos__message-empty">
           Repository list is empty
         </span>
