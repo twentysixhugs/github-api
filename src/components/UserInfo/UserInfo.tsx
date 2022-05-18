@@ -1,4 +1,5 @@
 import Stats from './Stats';
+import './UserInfo.css';
 
 type UserInfoProps = {
   followersCount: number;
@@ -24,7 +25,7 @@ export default function UserInfo({
         src={avatarUrl}
         alt="User avatar"
       ></img>
-      <span className="c-user-info__name">{name}</span>
+      <h2 className="c-user-info__name">{name}</h2>
       <a
         className="c-user-info__login"
         href={htmlUrl}

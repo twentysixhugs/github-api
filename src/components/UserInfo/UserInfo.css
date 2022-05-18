@@ -1,0 +1,50 @@
+.c-user-info {
+  padding-top: 39px;
+  padding-left: 57px;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+}
+
+.c-user-info__avatar {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+}
+
+.c-user-info__name {
+  margin-top: 29px;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 34px;
+}
+
+.c-user-info__login {
+  margin-top: 12px;
+
+  color: #0064eb;
+
+  font-size: 18px;
+  line-height: 22px;
+  text-decoration: none;
+}
+
+/* Stats */
+
+.c-stats {
+  margin-top: 25px;
+
+  display: flex;
+  gap: 20px;
+}
+
+.c-stats__wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.c-stats__stats-data {
+  font-size: 16px;
+  line-height: 24px;
+}
