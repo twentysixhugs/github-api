@@ -1,5 +1,5 @@
 .c-header {
-  min-height: 72px;
+  min-height: var(--header-offset);
   padding: 16px 41px;
 
   display: flex;
