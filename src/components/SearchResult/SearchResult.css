@@ -11,6 +11,8 @@
   text-align: center;
 }
 
+/* All states when the repos are not shown */
+
 .c-search-result__wrapper {
   display: flex;
   width: 210px;
@@ -37,4 +39,10 @@
 
 .c-search-result__img {
   width: 65px;
+}
+
+/* The state where the repos are shown */
+
+.c-search-result--default {
+  gap: 85px;
 }

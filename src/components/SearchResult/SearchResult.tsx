@@ -62,7 +62,7 @@ export default function SearchResult({
         </Base>
       );
     default:
-      return <Base>{children}</Base>;
+      return <Base classNameModifier="default">{children}</Base>;
   }
 }
 
