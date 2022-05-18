@@ -57,6 +57,7 @@
 
   background: #fff;
   border-radius: 6px;
+  word-break: break-word;
 }
 
 .c-repos-entry__name-link {
