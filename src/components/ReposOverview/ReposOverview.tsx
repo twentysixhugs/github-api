@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { IRepo } from './types';
 
 import reposNotFoundIcon from './assets/repos_not_found_icon.svg';
+import './ReposOverview.css';
 
 type ReposOverviewProps = {
   allRepos: IRepo[];
@@ -28,7 +29,6 @@ export default function ReposOverview({ allRepos }: ReposOverviewProps) {
   }, [allRepos]);
 
   useEffect(() => {
-    console.log(currentPage);
     setPageOffset(PER_PAGE * currentPage);
   }, [currentPage]);
 
