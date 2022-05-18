@@ -1,5 +1,7 @@
 import Search from './Search';
-import searchIconSmall from './assets/search_icon_small.svg';
+
+import githubIcon from './assets/github_icon.svg';
+import './Header.css';
 
 type HeaderProps = {
   onSearch: (query: string) => void;
@@ -10,7 +12,7 @@ export default function Header({ onSearch }: HeaderProps) {
     <header className="c-header">
       <img
         className="c-header__github-logo"
-        src={searchIconSmall}
+        src={githubIcon}
         alt="github logo"
       ></img>
       <Search onSearch={onSearch} />
