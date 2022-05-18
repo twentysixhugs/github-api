@@ -1,6 +1,7 @@
 import React from 'react';
 import searchIconPath from './assets/search_icon.svg';
 import userIconPath from './assets/user_icon.svg';
+import Loader from './Loader';
 
 type SearchStateProps = {
   searchState?: 'Initial state' | 'Loading' | 'User not found' | 'Error';
@@ -26,7 +27,11 @@ export default function SearchState({
         </Base>
       );
     case 'Loading':
-      return <Base>loading spinner</Base>;
+      return (
+        <Base>
+          <Loader />
+        </Base>
+      );
     case 'User not found':
       return (
         <Base>
