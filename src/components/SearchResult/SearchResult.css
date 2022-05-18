@@ -1,5 +1,6 @@
 .c-search-result {
   height: calc(100vh - var(--header-offset));
+  padding: 39px 57px 57px 30px;
 
   display: flex;
   justify-content: center;
