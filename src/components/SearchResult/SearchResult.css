@@ -2,6 +2,7 @@
   height: calc(100vh - var(--header-offset));
 
   display: flex;
+  justify-content: center;
 
   font-size: 22px;
   line-height: 31px;
@@ -19,7 +20,8 @@
 
 .c-search-result--initial > .c-search-result__wrapper,
 .c-search-result--user-not-found > .c-search-result__wrapper,
-.c-search-result--error > .c-search-result__wrapper {
+.c-search-result--error > .c-search-result__wrapper,
+.c-search-result--loading {
   flex-flow: column;
   justify-content: center;
   align-items: center;
@@ -43,4 +45,5 @@
 
 .c-search-result--default {
   gap: 85px;
+  justify-content: none;
 }
