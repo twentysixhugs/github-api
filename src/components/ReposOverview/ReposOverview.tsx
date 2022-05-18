@@ -1,7 +1,7 @@
 import Repos from './Repos';
 import Pagination from './Pagination';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IRepo } from './types';
 
 import reposNotFoundIcon from './assets/repos_not_found_icon.svg';
@@ -45,8 +45,8 @@ export default function ReposOverview({ allRepos }: ReposOverviewProps) {
   let viewToRender;
 
   if (allRepos.length > 0) {
-    viewToRender = (
-      <>
+    return (
+      <Base>
         {currentItems && (
           <Repos totalReposCount={allRepos.length} repos={currentItems} />
         )}
@@ -57,17 +57,34 @@ export default function ReposOverview({ allRepos }: ReposOverviewProps) {
           pageCount={pageCount}
           onPageClick={handlePageClick}
         />
-      </>
+      </Base>
     );
   } else {
-    viewToRender = (
-      <>
-        <img src={reposNotFoundIcon} alt=""></img>
-        <span className="c-repos__message-empty">
-          Repository list is empty
-        </span>
-      </>
+    return (
+      <Base classNameModifier="empty">
+        <div className="c-repos__empty">
+          <img src={reposNotFoundIcon} alt=""></img>
+          <span className="c-repos__message-empty">
+            Repository list is empty
+          </span>
+        </div>
+      </Base>
     );
   }
-  return <div className="c-repos-overview">{viewToRender}</div>;
+}
+
+function Base({
+  children,
+  classNameModifier,
+}: {
+  children?: React.ReactNode;
+  classNameModifier?: string;
+}) {
+  return (
+    <div
+      className={`c-repos-overview c-repos-overview--${classNameModifier}`}
+    >
+      {children}
+    </div>
+  );
 }

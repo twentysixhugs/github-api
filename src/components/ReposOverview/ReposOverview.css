@@ -1,6 +1,84 @@
+/* Repos overview (Repos list + pagination) */
+
+.c-repos-overview {
+  flex: 1;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+
+.c-repos-overview--empty {
+  justify-content: center;
+}
+
+/* Empty repo */
+
+.c-repos__empty {
+  margin-bottom: 120px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 48px;
+}
+
+.c-repos__empty > img {
+  width: 76px;
+}
+
+.c-repos__message-empty {
+  color: #808080;
+  font-size: 22px;
+  line-height: 31px;
+}
+
+/* Repos list */
+
+.c-repos {
+  text-align: left;
+}
+
+.c-repos__title {
+  margin-bottom: 29px;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 30px;
+}
+
+/* A single repo */
+
+.c-repos-entry {
+  min-height: 112px;
+  margin-top: 24px;
+  padding: 24px 32px;
+
+  display: flex;
+  flex-flow: column;
+  gap: 16px;
+
+  background: #fff;
+  border-radius: 6px;
+}
+
+.c-repos-entry__name-link {
+  width: max-content;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 29px;
+  color: #0064eb;
+  text-decoration: none;
+}
+
+.c-repos-entry__description {
+  font-size: 16px;
+  line-height: 19px;
+}
+
 /* Pagination */
 
 .c-pagination {
+  margin-top: 26px;
+  align-self: flex-end;
+
   display: flex;
   align-items: center;
   gap: 23.5px;
