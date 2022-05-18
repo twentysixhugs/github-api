@@ -30,12 +30,12 @@ export default function Pagination({
         pageCount={pageCount}
         previousLabel={<img src={paginationArrowIcon}></img>}
         renderOnZeroPageCount={() => null}
-        containerClassName="c-pagination__ui"
+        containerClassName="c-pagination__controls"
         breakClassName="c-pagination__break"
         pageClassName="c-pagination__page"
         activeClassName="c-pagination__active"
-        previousClassName="c-pagination__btn"
-        nextClassName="c-pagination__btn"
+        previousClassName="c-pagination__btn c-pagination__btn--prev"
+        nextClassName="c-pagination__btn c-pagination__btn--next"
         disabledClassName="c-pagination__btn--disabled"
         previousAriaLabel="previous page button"
         nextAriaLabel="next page button"
