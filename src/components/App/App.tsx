@@ -53,6 +53,9 @@ function App() {
         if (!res.ok && res.status === 404) {
           setIsNotFound(true);
           return;
+        } else if (!res.ok) {
+          // handle the error if it doesn't throw
+          setIsError(true);
         }
 
         const data = await res.json();
