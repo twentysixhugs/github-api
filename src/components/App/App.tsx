@@ -18,16 +18,16 @@ function App() {
     [key: string]: string | number | boolean;
   } | null;
 
-  type ReposData = Array<{
+  type ReposData = {
     ['name']: string;
     ['description']: string;
     ['html_url']: string;
     ['id']: number;
     [key: string]: string | number | boolean;
-  }> | null;
+  };
 
   const [userData, setUserData] = useState<UserData>(null);
-  const [reposData, setReposData] = useState<ReposData>(null);
+  const [reposData, setReposData] = useState<ReposData[] | null>(null);
 
   const [isLoading, setIsLoading] = useState(false);
   const [isNotFound, setIsNotFound] = useState(false);
@@ -46,16 +46,18 @@ function App() {
       callback:
         | React.Dispatch<React.SetStateAction<UserData>>
         | React.Dispatch<React.SetStateAction<ReposData>>,
-    ) => {
+    ): Promise<boolean> => {
       try {
         const res = await fetch(fetchUrl);
 
-        if (!res.ok && res.status === 404) {
-          setIsNotFound(true);
-          return;
-        } else if (!res.ok) {
-          // handle the error if it doesn't throw
-          setIsError(true);
+        if (!res.ok) {
+          if (res.status === 404) {
+            setIsNotFound(true);
+          } else {
+            setIsError(true);
+          }
+
+          return false;
         }
 
         const data = await res.json();
@@ -63,24 +65,52 @@ function App() {
         callback(data);
       } catch (err) {
         setIsError(true);
+        return false;
       }
+      return true;
     };
 
     if (searchQuery) {
       setIsLoading(true);
+      const loadedRepos: any = [];
 
       Promise.all([
         fetchData(
           `https://api.github.com/users/${searchQuery}`,
           setUserData,
         ),
-        fetchData(
-          `https://api.github.com/users/${searchQuery}/repos`,
-          setReposData,
-        ),
+        (async () => {
+          /* Fetch all repos page by page until we get them all.
+            They will be stored in loadedRepos */
+          let fetchCount = 1;
+
+          while (fetchCount) {
+            console.log('while loop');
+            const isFetchSuccessful = await fetchData(
+              `https://api.github.com/users/${searchQuery}/repos?per_page=100&page=${fetchCount}`,
+              (data: any) => {
+                // if there are no repos remaining
+                if (data.length === 0) {
+                  // we can't break the loop from a closured callback,
+                  // so after fetchCount++ it'll be 0 and the loop will stop
+                  fetchCount = -1;
+                } else {
+                  loadedRepos.push(...data);
+                }
+              },
+            );
+
+            if (isFetchSuccessful) {
+              fetchCount++;
+            } else {
+              fetchCount = 0;
+            }
+          }
+        })(),
       ]).then(() => {
         setSearchQuery(null);
         setIsLoading(false);
+        setReposData([...loadedRepos]);
       });
     }
   }, [searchQuery]);
