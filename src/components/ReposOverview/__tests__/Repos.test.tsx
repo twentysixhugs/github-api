@@ -31,7 +31,7 @@ describe('Rendering data', () => {
   ];
 
   it('Renders repos', () => {
-    render(<Repos repos={mockRepos} />);
+    render(<Repos totalReposCount={mockRepos.length} repos={mockRepos} />);
 
     mockRepos.forEach((repo) => {
       expect(screen.getByText(repo.name)).toBeInTheDocument();

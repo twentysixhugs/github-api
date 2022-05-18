@@ -47,7 +47,9 @@ export default function ReposOverview({ allRepos }: ReposOverviewProps) {
   if (allRepos.length > 0) {
     viewToRender = (
       <>
-        {currentItems && <Repos repos={currentItems} />}
+        {currentItems && (
+          <Repos totalReposCount={allRepos.length} repos={currentItems} />
+        )}
         <Pagination
           pageOffset={pageOffset}
           perPage={PER_PAGE}

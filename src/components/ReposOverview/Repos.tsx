@@ -3,12 +3,13 @@ import ReposEntry from './ReposEntry';
 
 type ReposProps = {
   repos: IRepo[];
+  totalReposCount: number;
 };
 
-export default function Repos({ repos }: ReposProps) {
+export default function Repos({ repos, totalReposCount }: ReposProps) {
   return (
     <div className="c-repos">
-      <h1 className="c-repos__title">Repositories</h1>
+      <h1 className="c-repos__title">Repositories ({totalReposCount})</h1>
       {repos.map((repo) => {
         return (
           <ReposEntry
