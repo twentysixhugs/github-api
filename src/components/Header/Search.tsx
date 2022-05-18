@@ -25,6 +25,7 @@ export default function Search({ onSearch }: SearchProps) {
         onChange={(e) => setQuery(e.target.value)}
         name="query"
         autoComplete="off"
+        placeholder="Enter GitHub username"
       ></input>
     </form>
   );
