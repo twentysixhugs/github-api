@@ -2,8 +2,6 @@
   height: calc(100vh - var(--header-offset));
 
   display: flex;
-  justify-content: center;
-  align-items: center;
 
   font-size: 22px;
   line-height: 31px;
