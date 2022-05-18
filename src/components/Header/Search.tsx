@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import searchIconSmall from './assets/search_icon_small.svg';
 
 type SearchProps = {
   onSearch: (query: string) => void;
@@ -17,13 +18,16 @@ export default function Search({ onSearch }: SearchProps) {
 
   return (
     <form className="c-search" onSubmit={handleSubmit}>
-      <input
-        className="c-search__input"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        name="query"
-        autoComplete="off"
-      ></input>
+      <div className="c-search__wrapper">
+        <img className="c-search__icon" src={searchIconSmall} alt=""></img>
+        <input
+          className="c-search__input"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          name="query"
+          autoComplete="off"
+        ></input>
+      </div>
     </form>
   );
 }
