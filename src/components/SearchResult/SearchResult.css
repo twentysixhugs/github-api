@@ -1,4 +1,4 @@
-.c-search-state {
+.c-search-result {
   height: calc(100vh - var(--header-offset));
 
   display: flex;
@@ -11,15 +11,15 @@
   text-align: center;
 }
 
-.c-search-state__wrapper {
+.c-search-result__wrapper {
   display: flex;
   width: 210px;
   min-height: 196px;
 }
 
-.c-search-state--initial > .c-search-state__wrapper,
-.c-search-state--user-not-found > .c-search-state__wrapper,
-.c-search-state--error > .c-search-state__wrapper {
+.c-search-result--initial > .c-search-result__wrapper,
+.c-search-result--user-not-found > .c-search-result__wrapper,
+.c-search-result--error > .c-search-result__wrapper {
   flex-flow: column;
   justify-content: center;
   align-items: center;
@@ -27,14 +27,14 @@
   color: #808080;
 }
 
-.c-search-state--initial > .c-search-state__wrapper {
+.c-search-result--initial > .c-search-result__wrapper {
   gap: 47px;
 }
 
-.c-search-state--user-not-found > .c-search-state__wrapper {
+.c-search-result--user-not-found > .c-search-result__wrapper {
   gap: 42px;
 }
 
-.c-search-state__img {
+.c-search-result__img {
   width: 65px;
 }

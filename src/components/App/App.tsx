@@ -3,7 +3,7 @@ import Header from '../Header';
 import { IRepo } from '../ReposOverview/types';
 import ReposOverview from '../ReposOverview';
 import UserInfo from '../UserInfo';
-import SearchState from '../SearchState';
+import SearchResult from '../SearchResult';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState<null | string>(null);
@@ -93,19 +93,19 @@ function App() {
   let viewToRender;
 
   if (isNotFound) {
-    viewToRender = <SearchState searchState="User not found" />;
+    viewToRender = <SearchResult searchState="User not found" />;
   } else if (isError) {
     // If it's not 404 (so that the app doesn't break)
-    viewToRender = <SearchState searchState="Error" />;
+    viewToRender = <SearchResult searchState="Error" />;
   } else if (isLoading) {
-    viewToRender = <SearchState searchState="Loading" />;
+    viewToRender = <SearchResult searchState="Loading" />;
   } else if (!(userData && reposData)) {
     // If it's not loading, but there's no data
-    viewToRender = <SearchState searchState="Initial state" />;
+    viewToRender = <SearchResult searchState="Initial state" />;
   } else if (userData && reposData) {
     // If there are no errors, it's not loading and the data is available
     viewToRender = (
-      <SearchState>
+      <SearchResult>
         <UserInfo
           name={userData['name']}
           login={userData['login']}
@@ -126,7 +126,7 @@ function App() {
             return repoDataToRender;
           })}
         />
-      </SearchState>
+      </SearchResult>
     );
   }
 
