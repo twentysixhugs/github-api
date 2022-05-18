@@ -1,6 +1,6 @@
 .c-search-result {
   height: calc(100vh - var(--header-offset));
-  padding: 39px 57px 57px 30px;
+  padding: 39px 57px 30px 57px;
 
   display: flex;
   justify-content: center;
@@ -46,5 +46,4 @@
 
 .c-search-result--default {
   gap: 85px;
-  justify-content: none;
 }
