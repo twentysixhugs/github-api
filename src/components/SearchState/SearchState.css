@@ -1,0 +1,40 @@
+.c-search-state {
+  height: calc(100vh - var(--header-offset));
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 22px;
+  line-height: 31px;
+  letter-spacing: 0px;
+  text-align: center;
+}
+
+.c-search-state__wrapper {
+  display: flex;
+  width: 210px;
+  min-height: 196px;
+}
+
+.c-search-state--initial > .c-search-state__wrapper,
+.c-search-state--user-not-found > .c-search-state__wrapper,
+.c-search-state--error > .c-search-state__wrapper {
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+
+  color: #808080;
+}
+
+.c-search-state--initial > .c-search-state__wrapper {
+  gap: 47px;
+}
+
+.c-search-state--user-not-found > .c-search-state__wrapper {
+  gap: 42px;
+}
+
+.c-search-state__img {
+  width: 65px;
+}
