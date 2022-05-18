@@ -42,8 +42,6 @@ export default function ReposOverview({ allRepos }: ReposOverviewProps) {
     setCurrentPage(selected);
   };
 
-  let viewToRender;
-
   if (allRepos.length > 0) {
     return (
       <Base>
