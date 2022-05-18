@@ -17,6 +17,12 @@
   line-height: 34px;
 }
 
+@media (max-width: 785px) {
+  .c-user-info {
+    align-items: center;
+  }
+}
+
 .c-user-info__login {
   margin-top: 12px;
 
@@ -45,4 +51,15 @@
 .c-stats__stats-data {
   font-size: 16px;
   line-height: 24px;
+}
+
+@media (max-width: 900px) {
+  .c-user-info__avatar {
+    width: 140px;
+    height: 140px;
+  }
+
+  .c-stats {
+    flex-flow: column;
+  }
 }

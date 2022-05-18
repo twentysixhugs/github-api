@@ -9,6 +9,12 @@
   background: #0064eb;
 }
 
+@media (max-width: 500px) {
+  .c-header {
+    padding: 16px 20px;
+  }
+}
+
 .c-search {
   width: 500px;
 

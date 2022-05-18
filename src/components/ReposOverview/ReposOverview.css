@@ -74,6 +74,12 @@
   line-height: 19px;
 }
 
+@media (max-width: 500px) {
+  .c-repos-entry__name-link {
+    width: unset;
+  }
+}
+
 /* Pagination */
 
 .c-pagination {
@@ -97,6 +103,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  min-width: max-content;
   height: 100%;
 }
 
@@ -163,4 +170,28 @@
 
   font-size: 14px;
   line-height: 21px;
+}
+
+@media (max-width: 850px) {
+  .c-pagination__stats {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 500px) {
+  .c-pagination {
+    gap: 4px;
+  }
+
+  .c-pagination__page {
+    margin-inline: 3px;
+  }
+
+  .c-pagination__btn--prev {
+    margin-right: 5px;
+  }
+
+  .c-pagination__btn--next {
+    margin-left: 5px;
+  }
 }

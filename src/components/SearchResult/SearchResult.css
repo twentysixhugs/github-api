@@ -11,6 +11,19 @@
   text-align: center;
 }
 
+@media (max-width: 785px) {
+  .c-search-result {
+    flex-flow: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 500px) {
+  .c-search-result {
+    padding: 20px 14px 15px 14px;
+  }
+}
+
 /* All states when the repos are not shown */
 
 .c-search-result__wrapper {
