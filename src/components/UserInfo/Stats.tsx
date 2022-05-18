@@ -1,3 +1,6 @@
+import followersIcon from './assets/followers_icon.svg';
+import followingIcon from './assets/following_icon.svg';
+
 type StatsProps = {
   followersCount: number;
   followingCount: number;
@@ -19,7 +22,7 @@ export default function Stats({
   return (
     <div className="c-stats">
       <div className="c-stats__wrapper">
-        <img className="c-stats__img" alt=""></img>
+        <img className="c-stats__img" src={followersIcon} alt=""></img>
         <span className="c-stats__stats-data">
           {`${formatNumber(followersCount)} ${
             followersCount !== 1 ? 'followers' : 'follower'
@@ -27,7 +30,7 @@ export default function Stats({
         </span>
       </div>
       <div className="c-stats__wrapper">
-        <img className="c-stats__img" alt=""></img>
+        <img className="c-stats__img" src={followingIcon} alt=""></img>
         <span className="c-stats__stats-data">
           {`${formatNumber(followingCount)} following`}
         </span>
