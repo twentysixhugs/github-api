@@ -18,16 +18,14 @@ export default function Search({ onSearch }: SearchProps) {
 
   return (
     <form className="c-search" onSubmit={handleSubmit}>
-      <div className="c-search__wrapper">
-        <img className="c-search__icon" src={searchIconSmall} alt=""></img>
-        <input
-          className="c-search__input"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          name="query"
-          autoComplete="off"
-        ></input>
-      </div>
+      <img className="c-search__icon" src={searchIconSmall} alt=""></img>
+      <input
+        className="c-search__input"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        name="query"
+        autoComplete="off"
+      ></input>
     </form>
   );
 }
