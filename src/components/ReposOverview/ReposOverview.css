@@ -151,6 +151,11 @@
   transform: scaleX(-1);
 }
 
+.c-pagination__btn--disabled {
+  filter: grayscale(1) brightness(1.7);
+  cursor: default;
+}
+
 /* Stats */
 
 .c-pagination__stats {
