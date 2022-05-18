@@ -1,8 +1,6 @@
 import Repos from './Repos';
 import Pagination from './Pagination';
 
-import ReactPaginate, { ReactPaginateProps } from 'react-paginate';
-
 import { useState, useEffect } from 'react';
 import { IRepo } from './types';
 
