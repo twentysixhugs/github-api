@@ -19,7 +19,11 @@ export default function Pagination({
   return (
     <div className="c-pagination">
       <span className="c-pagination__stats">
-        {pageOffset + 1}-{pageOffset + perPage} of {allItemsCount} items
+        {pageOffset + 1}-
+        {pageOffset + perPage < allItemsCount
+          ? pageOffset + perPage
+          : allItemsCount}{' '}
+        of {allItemsCount} items
       </span>
       <ReactPaginate
         breakLabel="..."
