@@ -85,7 +85,6 @@ function App() {
           let fetchCount = 1;
 
           while (fetchCount) {
-            console.log('while loop');
             const isFetchSuccessful = await fetchData(
               `https://api.github.com/users/${searchQuery}/repos?per_page=100&page=${fetchCount}&sort=updated`,
               (data: any) => {
