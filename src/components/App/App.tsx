@@ -15,6 +15,7 @@ function App() {
     ['avatar_url']: string;
     ['followers']: number;
     ['following']: number;
+    ['public_repos']: number;
     [key: string]: string | number | boolean;
   } | null;
 
@@ -40,83 +41,55 @@ function App() {
     }
   }, [isError, isNotFound]);
 
-  useEffect(() => {
-    const fetchData = async (
-      fetchUrl: string,
-      callback:
-        | React.Dispatch<React.SetStateAction<UserData>>
-        | React.Dispatch<React.SetStateAction<ReposData>>,
-    ): Promise<boolean> => {
-      try {
-        const res = await fetch(fetchUrl);
+  const fetchData = async (
+    fetchUrl: string,
+    callback:
+      | React.Dispatch<React.SetStateAction<UserData>>
+      | React.Dispatch<React.SetStateAction<ReposData[] | null>>,
+  ) => {
+    try {
+      const res = await fetch(fetchUrl);
 
-        if (!res.ok) {
-          if (res.status === 404) {
-            setIsNotFound(true);
-          } else {
-            setIsError(true);
-          }
-
-          return false;
+      if (!res.ok) {
+        if (res.status === 404) {
+          setIsNotFound(true);
+        } else {
+          setIsError(true);
         }
-
-        const data = await res.json();
-
-        callback(data);
-      } catch (err) {
-        setIsError(true);
-        return false;
       }
-      return true;
-    };
 
-    if (searchQuery) {
-      setIsLoading(true);
-      const loadedRepos: any = [];
+      const data = await res.json();
 
-      Promise.all([
-        fetchData(
-          `https://api.github.com/users/${searchQuery}`,
-          setUserData,
-        ),
-        (async () => {
-          /* Fetch all repos page by page until we get them all.
-            They will be stored in loadedRepos */
-          let fetchCount = 1;
-
-          while (fetchCount) {
-            const isFetchSuccessful = await fetchData(
-              `https://api.github.com/users/${searchQuery}/repos?per_page=100&page=${fetchCount}&sort=updated`,
-              (data: any) => {
-                // if there are no repos remaining
-                if (data.length === 0) {
-                  // we can't break the loop from a closured callback,
-                  // so after fetchCount++ it'll be 0 and the loop will stop
-                  fetchCount = -1;
-                } else {
-                  loadedRepos.push(...data);
-                }
-              },
-            );
-
-            if (isFetchSuccessful) {
-              fetchCount++;
-            } else {
-              fetchCount = 0;
-            }
-          }
-        })(),
-      ]).then(() => {
-        setSearchQuery(null);
-        setIsLoading(false);
-        setReposData([...loadedRepos]);
-      });
+      callback(data);
+      console.log(data);
+    } catch (err) {
+      setIsError(true);
     }
-  }, [searchQuery]);
+  };
 
   const handleSearch = (query: string) => {
     setIsNotFound(false);
     setSearchQuery(query);
+    setIsLoading(true);
+
+    Promise.all([
+      fetchData(`https://api.github.com/users/${query}`, setUserData),
+      fetchData(
+        `https://api.github.com/users/${query}/repos?per_page=4&page=1&sort=updated`,
+        setReposData,
+      ),
+    ]).then(() => {
+      setIsLoading(false);
+    });
+  };
+
+  const handlePageChange = (selectedPage: number) => {
+    fetchData(
+      `https://api.github.com/users/${searchQuery}/repos?per_page=4&page=${
+        selectedPage + 1
+      }&sort=updated`,
+      setReposData,
+    );
   };
 
   let viewToRender;
@@ -144,7 +117,7 @@ function App() {
           followingCount={userData['following']}
         />
         <ReposOverview
-          allRepos={reposData.map((repo) => {
+          currentRepos={reposData.map((repo) => {
             const repoDataToRender: IRepo = {
               name: repo['name'],
               description: repo['description'],
@@ -154,6 +127,8 @@ function App() {
 
             return repoDataToRender;
           })}
+          onPageChange={handlePageChange}
+          allReposLength={userData['public_repos']}
         />
       </SearchResult>
     );

@@ -8,11 +8,16 @@ import reposNotFoundIcon from './assets/repos_not_found_icon.svg';
 import './ReposOverview.css';
 
 type ReposOverviewProps = {
-  allRepos: IRepo[];
+  currentRepos: IRepo[];
+  allReposLength: number;
+  onPageChange: (selectedPage: number) => void;
 };
 
-export default function ReposOverview({ allRepos }: ReposOverviewProps) {
-  const [currentItems, setCurrentItems] = useState<null | IRepo[]>(null);
+export default function ReposOverview({
+  currentRepos,
+  allReposLength,
+  onPageChange,
+}: ReposOverviewProps) {
   const [currentPage, setCurrentPage] = useState(0);
   const [pageCount, setPageCount] = useState(0);
 
@@ -23,35 +28,30 @@ export default function ReposOverview({ allRepos }: ReposOverviewProps) {
   const PER_PAGE = 4;
 
   useEffect(() => {
-    /* When the repos are updated, reset pagination to the initial state */
-    setCurrentPage(0);
-    setPageOffset(0);
-  }, [allRepos]);
-
-  useEffect(() => {
     setPageOffset(PER_PAGE * currentPage);
   }, [currentPage]);
 
   useEffect(() => {
-    setCurrentItems(allRepos.slice(pageOffset, pageOffset + PER_PAGE));
+    // setCurrentItems(allRepos.slice(pageOffset, pageOffset + PER_PAGE));
 
-    setPageCount(Math.ceil(allRepos.length / PER_PAGE));
-  }, [pageOffset, allRepos]);
+    setPageCount(Math.ceil(allReposLength / PER_PAGE));
+  }, [allReposLength]);
 
   const handlePageClick = ({ selected }: { selected: number }) => {
     setCurrentPage(selected);
+    onPageChange(selected);
   };
 
-  if (allRepos.length > 0) {
+  if (allReposLength > 0) {
     return (
       <Base>
-        {currentItems && (
-          <Repos totalReposCount={allRepos.length} repos={currentItems} />
+        {currentRepos && (
+          <Repos totalReposCount={allReposLength} repos={currentRepos} />
         )}
         <Pagination
           pageOffset={pageOffset}
           perPage={PER_PAGE}
-          allItemsCount={allRepos.length}
+          allItemsCount={allReposLength}
           pageCount={pageCount}
           onPageClick={handlePageClick}
         />
