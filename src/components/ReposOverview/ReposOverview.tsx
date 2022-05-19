@@ -10,12 +10,14 @@ import './ReposOverview.css';
 type ReposOverviewProps = {
   currentRepos: IRepo[];
   allReposLength: number;
+  perPage: number;
   onPageChange: (selectedPage: number) => void;
 };
 
 export default function ReposOverview({
   currentRepos,
   allReposLength,
+  perPage,
   onPageChange,
 }: ReposOverviewProps) {
   const [currentPage, setCurrentPage] = useState(0);
@@ -24,17 +26,14 @@ export default function ReposOverview({
   // The number of items that have already been displayed by the previous pages
   const [pageOffset, setPageOffset] = useState(0);
 
-  // How many items we want to show on each page
-  const PER_PAGE = 4;
-
   useEffect(() => {
-    setPageOffset(PER_PAGE * currentPage);
+    setPageOffset(perPage * currentPage);
   }, [currentPage]);
 
   useEffect(() => {
     // setCurrentItems(allRepos.slice(pageOffset, pageOffset + PER_PAGE));
 
-    setPageCount(Math.ceil(allReposLength / PER_PAGE));
+    setPageCount(Math.ceil(allReposLength / perPage));
   }, [allReposLength]);
 
   const handlePageClick = ({ selected }: { selected: number }) => {
@@ -50,7 +49,7 @@ export default function ReposOverview({
         )}
         <Pagination
           pageOffset={pageOffset}
-          perPage={PER_PAGE}
+          perPage={perPage}
           allItemsCount={allReposLength}
           pageCount={pageCount}
           onPageClick={handlePageClick}

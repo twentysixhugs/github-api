@@ -34,6 +34,8 @@ function App() {
   const [isNotFound, setIsNotFound] = useState(false);
   const [isError, setIsError] = useState(false);
 
+  const PER_PAGE = 4;
+
   useEffect(() => {
     if (isError || isNotFound) {
       setUserData(null);
@@ -75,7 +77,7 @@ function App() {
     Promise.all([
       fetchData(`https://api.github.com/users/${query}`, setUserData),
       fetchData(
-        `https://api.github.com/users/${query}/repos?per_page=4&page=1&sort=updated`,
+        `https://api.github.com/users/${query}/repos?per_page=${PER_PAGE}&page=1&sort=updated`,
         setReposData,
       ),
     ]).then(() => {
@@ -85,7 +87,7 @@ function App() {
 
   const handlePageChange = (selectedPage: number) => {
     fetchData(
-      `https://api.github.com/users/${searchQuery}/repos?per_page=4&page=${
+      `https://api.github.com/users/${searchQuery}/repos?per_page=${PER_PAGE}&page=${
         selectedPage + 1
       }&sort=updated`,
       setReposData,
@@ -129,6 +131,7 @@ function App() {
           })}
           onPageChange={handlePageChange}
           allReposLength={userData['public_repos']}
+          perPage={PER_PAGE}
         />
       </SearchResult>
     );
