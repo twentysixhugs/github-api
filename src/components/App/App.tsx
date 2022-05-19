@@ -99,7 +99,7 @@ function App() {
   if (isNotFound) {
     viewToRender = <SearchResult searchState="User not found" />;
   } else if (isError) {
-    // If it's not 404 (so that the app doesn't break)
+    // If it's not 404 (so that the app doesn't break after, say, a network error)
     viewToRender = <SearchResult searchState="Error" />;
   } else if (isLoading) {
     viewToRender = <SearchResult searchState="Loading" />;
