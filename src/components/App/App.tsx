@@ -63,7 +63,6 @@ function App() {
       const data = await res.json();
 
       callback(data);
-      console.log(data);
     } catch (err) {
       setIsError(true);
     }
